@@ -6,8 +6,14 @@
 //  Copyright © 2016 sales-i. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface SILogglyLogger : NSObject
+//! Project version number for SILogglyLogger.
+FOUNDATION_EXPORT double SILogglyLoggerVersionNumber;
 
-@end
+//! Project version string for SILogglyLogger.
+FOUNDATION_EXPORT const unsigned char SILogglyLoggerVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <SILogglyLogger/PublicHeader.h>
+
+

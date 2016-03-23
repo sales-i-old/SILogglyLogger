@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E08E53011CA2A3A10038DD53"
-               BuildableName = "libSILogglyLogger.a"
+               BlueprintIdentifier = "E08E53121CA2A6420038DD53"
+               BuildableName = "SILogglyLogger.framework"
                BlueprintName = "SILogglyLogger"
                ReferencedContainer = "container:SILogglyLogger.xcodeproj">
             </BuildableReference>
@@ -45,8 +45,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E08E53011CA2A3A10038DD53"
-            BuildableName = "libSILogglyLogger.a"
+            BlueprintIdentifier = "E08E53121CA2A6420038DD53"
+            BuildableName = "SILogglyLogger.framework"
             BlueprintName = "SILogglyLogger"
             ReferencedContainer = "container:SILogglyLogger.xcodeproj">
          </BuildableReference>
@@ -63,8 +63,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E08E53011CA2A3A10038DD53"
-            BuildableName = "libSILogglyLogger.a"
+            BlueprintIdentifier = "E08E53121CA2A6420038DD53"
+            BuildableName = "SILogglyLogger.framework"
             BlueprintName = "SILogglyLogger"
             ReferencedContainer = "container:SILogglyLogger.xcodeproj">
          </BuildableReference>
