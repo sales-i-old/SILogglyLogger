@@ -8,12 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		E08E53161CA2A6420038DD53 /* SILogglyLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = E08E53151CA2A6420038DD53 /* SILogglyLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E08E531E1CA2ADF00038DD53 /* SILogger.h in Headers */ = {isa = PBXBuildFile; fileRef = E08E531C1CA2ADF00038DD53 /* SILogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E08E531F1CA2ADF00038DD53 /* SILogger.m in Sources */ = {isa = PBXBuildFile; fileRef = E08E531D1CA2ADF00038DD53 /* SILogger.m */; };
+		E08E53221CA2B4BB0038DD53 /* LogglyEndPointHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = E08E53201CA2B4BB0038DD53 /* LogglyEndPointHandler.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		E08E53231CA2B4BB0038DD53 /* LogglyEndPointHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E08E53211CA2B4BB0038DD53 /* LogglyEndPointHandler.m */; };
+		E08E53261CA2B4EA0038DD53 /* SILogglyFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = E08E53241CA2B4EA0038DD53 /* SILogglyFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E08E53271CA2B4EA0038DD53 /* SILogglyFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E08E53251CA2B4EA0038DD53 /* SILogglyFormatter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E08E53131CA2A6420038DD53 /* SILogglyLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SILogglyLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E08E53151CA2A6420038DD53 /* SILogglyLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SILogglyLogger.h; sourceTree = "<group>"; };
 		E08E53171CA2A6420038DD53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E08E531C1CA2ADF00038DD53 /* SILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SILogger.h; path = Source/SILogger.h; sourceTree = SOURCE_ROOT; };
+		E08E531D1CA2ADF00038DD53 /* SILogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SILogger.m; path = Source/SILogger.m; sourceTree = SOURCE_ROOT; };
+		E08E53201CA2B4BB0038DD53 /* LogglyEndPointHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogglyEndPointHandler.h; path = Source/LogglyEndPointHandler.h; sourceTree = SOURCE_ROOT; };
+		E08E53211CA2B4BB0038DD53 /* LogglyEndPointHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogglyEndPointHandler.m; path = Source/LogglyEndPointHandler.m; sourceTree = SOURCE_ROOT; };
+		E08E53241CA2B4EA0038DD53 /* SILogglyFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SILogglyFormatter.h; path = Source/SILogglyFormatter.h; sourceTree = SOURCE_ROOT; };
+		E08E53251CA2B4EA0038DD53 /* SILogglyFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SILogglyFormatter.m; path = Source/SILogglyFormatter.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +42,7 @@
 		E08E52F91CA2A3A10038DD53 = {
 			isa = PBXGroup;
 			children = (
+				E08E531B1CA2AD3A0038DD53 /* Source */,
 				E08E53141CA2A6420038DD53 /* SILogglyLogger */,
 				E08E53031CA2A3A10038DD53 /* Products */,
 			);
@@ -52,6 +65,20 @@
 			path = SILogglyLogger;
 			sourceTree = "<group>";
 		};
+		E08E531B1CA2AD3A0038DD53 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				E08E531C1CA2ADF00038DD53 /* SILogger.h */,
+				E08E531D1CA2ADF00038DD53 /* SILogger.m */,
+				E08E53201CA2B4BB0038DD53 /* LogglyEndPointHandler.h */,
+				E08E53211CA2B4BB0038DD53 /* LogglyEndPointHandler.m */,
+				E08E53241CA2B4EA0038DD53 /* SILogglyFormatter.h */,
+				E08E53251CA2B4EA0038DD53 /* SILogglyFormatter.m */,
+			);
+			name = Source;
+			path = SILogglyLogger;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -59,7 +86,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E08E531E1CA2ADF00038DD53 /* SILogger.h in Headers */,
 				E08E53161CA2A6420038DD53 /* SILogglyLogger.h in Headers */,
+				E08E53261CA2B4EA0038DD53 /* SILogglyFormatter.h in Headers */,
+				E08E53221CA2B4BB0038DD53 /* LogglyEndPointHandler.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +160,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E08E531F1CA2ADF00038DD53 /* SILogger.m in Sources */,
+				E08E53271CA2B4EA0038DD53 /* SILogglyFormatter.m in Sources */,
+				E08E53231CA2B4BB0038DD53 /* LogglyEndPointHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

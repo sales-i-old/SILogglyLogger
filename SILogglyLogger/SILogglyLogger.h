@@ -14,6 +14,10 @@ FOUNDATION_EXPORT double SILogglyLoggerVersionNumber;
 //! Project version string for SILogglyLogger.
 FOUNDATION_EXPORT const unsigned char SILogglyLoggerVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <SILogglyLogger/PublicHeader.h>
+#if __has_include(<SILogglyLogger/SILogger.h>)
+#import <SILogglyLogger/SILogger.h>
+#endif
 
-
+#if __has_include(<SILogglyLogger/SILogglyFormatter.h>)
+#import <SILogglyLogger/SILogglyFormatter.h>
+#endif
