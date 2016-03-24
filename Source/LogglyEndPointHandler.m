@@ -60,9 +60,10 @@ static NSURLSessionConfiguration *sessionConfiguration = nil;
 + (NSURL *)urlWithKey:(NSString *)key tags:(NSString *)tags bulk:(BOOL)bulk{
 
     NSString *urlString = [NSString stringWithFormat:@"https://logs-01.loggly.com/%@/%@",bulk?@"bulk":@"inputs",key];
-    NSLog(@"Using url: %@",urlString);
+   
     if (tags)
         urlString = [urlString stringByAppendingString:[NSString stringWithFormat:@"/tag/%@/",tags]];
+     NSLog(@"Using url: %@",urlString);
     return [NSURL URLWithString:urlString];
 }
 
@@ -93,6 +94,7 @@ static NSURLSessionConfiguration *sessionConfiguration = nil;
         } else if (data) {
             NSString *responseString = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
             NSLog(@"LOGGLY: Response = %@.",responseString);
+            completion(YES);
         }
         
     }];
