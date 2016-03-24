@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    LogglyInfo = 1,
-    LogglyError = 2,
-    LogglyWarning = 3,
-    LogglyFatal = 4
+    LogglyTrace = 1,
+    LogglyDebug = 2,
+    LogglyInfo = 3,
+    LogglyWarning = 4,
+    LogglyError = 5,
+    LogglyCritical = 6
 } SILogglyLogLevel;
 
 @interface SILogglyFormatter : NSObject

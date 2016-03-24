@@ -15,7 +15,7 @@
 - (id)init {
     if ((self = [super init])) {
         _customFields = [NSMutableDictionary dictionary];
-        _logLevel = LogglyInfo;
+        _logLevel = LogglyTrace;
     }
     return self;
 }

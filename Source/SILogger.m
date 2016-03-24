@@ -36,6 +36,7 @@ static NSArray *tags = nil;
     if ((self = [super init])) {
         _queue = dispatch_queue_create("com.sales-i.SILogglyLogger.queue", NULL);
         _logMessages = [NSMutableArray array];
+        _minimumLogLevel = LogglyTrace;
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(appDidGoBackground)
                                                      name:@"UIApplicationWillResignActiveNotification"
@@ -65,6 +66,7 @@ static NSArray *tags = nil;
 + (void)log:(NSString *)logString formatter:(SILogglyFormatter *)formatter {
     if (!formatter)
         formatter = [[SILogglyFormatter alloc] init];
+    if ([SILogger sharedInstance].minimumLogLevel > formatter.logLevel) return;
     if (formatter.message.length == 0){
         formatter.message = logString;
     }
