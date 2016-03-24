@@ -8,6 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SILogglyFormatter : NSObject
+typedef enum {
+    LogglyInfo = 1,
+    LogglyError = 2,
+    LogglyWarning = 3,
+    LogglyFatal = 4
+} SILogglyLogLevel;
 
+@interface SILogglyFormatter : NSObject
+@property (nonatomic, readonly) NSString *timestamp;
+@property (nonatomic, readonly) NSString *appVersion;
+@property (nonatomic, readonly) NSString *appBuildNumber;
+@property (nonatomic, readonly) NSString *deviceModel;
+@property (nonatomic, readonly) NSString *osVersion;
+@property (nonatomic, strong) NSString *message;
+@property (nonatomic, assign) SILogglyLogLevel logLevel;
+@property (nonatomic, strong) NSMutableDictionary *customFields;
+
+@property (nonatomic, readonly) NSDictionary *toDictionary;
+@property (nonatomic, readonly) NSString *toString;
 @end

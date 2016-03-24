@@ -10,7 +10,7 @@
 #import "SILogglyFormatter.h"
 
 @interface SILogger : NSObject
-+ (SILogger *)initWithKey:(NSString *)logglyKey;
++ (SILogger *)initWithKey:(NSString *)logglyKey tags:(NSArray *)tags;
 + (void)log:(NSString *)logString;
-+ (void)log:(NSString *)logString withFormatter:(SILogglyFormatter *)formatter;
++ (void)log:(NSString *)logString formatter:(SILogglyFormatter *)formatter;
 @end
