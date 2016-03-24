@@ -12,6 +12,13 @@
 
 @implementation SILogglyFormatter
 
+- (id)init {
+    if ((self = [super init])) {
+        _customFields = [NSMutableDictionary dictionary];
+    }
+    return self;
+}
+
 - (NSString *)timestamp {
     return [SILogglyFormatter iso8601StringFromDate:[NSDate date]];
 }

@@ -63,6 +63,9 @@ static NSArray *tags = nil;
 + (void)log:(NSString *)logString formatter:(SILogglyFormatter *)formatter {
     if (!formatter)
         formatter = [[SILogglyFormatter alloc] init];
+    if (formatter.message.length == 0){
+        formatter.message = logString;
+    }
     dispatch_barrier_async([SILogger sharedInstance].queue, ^{
         [LogglyEndPointHandler addLogToQueue:formatter.toString];
     });
