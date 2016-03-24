@@ -45,7 +45,9 @@ static NSArray *tags = nil;
 }
 
 - (void)appDidGoBackground {
-    [LogglyEndPointHandler sendStoredLogsWithKey:key tags:tags];
+    dispatch_barrier_async([SILogger sharedInstance].queue, ^{
+        [LogglyEndPointHandler sendStoredLogsWithKey:key tags:tags];
+    });
 }
 #pragma mark init method
 

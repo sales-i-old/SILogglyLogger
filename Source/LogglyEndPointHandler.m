@@ -40,23 +40,27 @@ static NSURLSessionConfiguration *sessionConfiguration = nil;
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:kSILogglyStoreKey] isKindOfClass:[NSArray class]]){
             NSArray *logs = [[NSUserDefaults standardUserDefaults] objectForKey:kSILogglyStoreKey];
             NSString *bulkLogString = [logs componentsJoinedByString:@"\n"];
-            [LogglyEndPointHandler postWithURL: [LogglyEndPointHandler urlWithKey:key
-                                                                             tags:[tags componentsJoinedByString:@","]
-                                                                             bulk:YES]
-                                      withBody:bulkLogString
-                                    completion:^(BOOL success) {
-                                        if (success){
-                                            [[NSUserDefaults standardUserDefaults]
-                                             setObject:@[] forKey:kSILogglyStoreKey];
-                                            [[NSUserDefaults standardUserDefaults] synchronize];
-                                        }
-                                    }];
+            if (logs.count > 0){
+                [LogglyEndPointHandler postWithURL: [LogglyEndPointHandler urlWithKey:key
+                                                                                 tags:[tags componentsJoinedByString:@","]
+                                                                                 bulk:YES]
+                                          withBody:bulkLogString
+                                        completion:^(BOOL success) {
+                                            if (success){
+                                                [[NSUserDefaults standardUserDefaults]
+                                                 setObject:@[] forKey:kSILogglyStoreKey];
+                                                [[NSUserDefaults standardUserDefaults] synchronize];
+                                            }
+                                        }];
+            }
         }
     }
 }
 
 + (NSURL *)urlWithKey:(NSString *)key tags:(NSString *)tags bulk:(BOOL)bulk{
+
     NSString *urlString = [NSString stringWithFormat:@"https://logs-01.loggly.com/%@/%@",bulk?@"bulk":@"inputs",key];
+    NSLog(@"Using url: %@",urlString);
     if (tags)
         [urlString stringByAppendingString:[NSString stringWithFormat:@"/tag/%@/",tags]];
     return [NSURL URLWithString:urlString];
