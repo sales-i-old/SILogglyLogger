@@ -50,7 +50,7 @@ static NSArray *tags = nil;
 }
 
 - (NSTimer *)startPoll {
-    return [NSTimer timerWithTimeInterval:_postLogIntervalTime target:self selector:@selector(sendLogglyLogs) userInfo:nil repeats:YES];
+    return [NSTimer scheduledTimerWithTimeInterval:_postLogIntervalTime target:self selector:@selector(sendLogglyLogs) userInfo:nil repeats:YES];
 }
 - (void)dealloc
 {
