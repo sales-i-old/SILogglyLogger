@@ -37,7 +37,7 @@ static NSArray *tags = nil;
     if ((self = [super init])) {
         _queue = dispatch_queue_create("com.sales-i.SILogglyLogger.queue", NULL);
         _logMessages = [NSMutableArray array];
-        _minimumLogLevel = LogglyTrace;
+        _minimumLogLevel = LogglyWarning;
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(sendLogglyLogs)
                                                      name:@"UIApplicationWillResignActiveNotification"
@@ -49,19 +49,14 @@ static NSArray *tags = nil;
     return self;
 }
 
-- (NSTimer *)startPoll {
-    return [NSTimer scheduledTimerWithTimeInterval:_postLogIntervalTime target:self selector:@selector(sendLogglyLogs) userInfo:nil repeats:YES];
-}
 - (void)dealloc
 {
     [_postTimer invalidate];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)sendLogglyLogs {
-    dispatch_barrier_async([SILogger sharedInstance].queue, ^{
-        [LogglyEndPointHandler sendStoredLogsWithKey:key tags:tags];
-    });
+- (NSTimer *)startPoll {
+    return [NSTimer scheduledTimerWithTimeInterval:_postLogIntervalTime target:self selector:@selector(sendLogglyLogs) userInfo:nil repeats:YES];
 }
 
 - (void)setPostLogIntervalTime:(NSUInteger)postLogIntervalTime {
@@ -72,6 +67,12 @@ static NSArray *tags = nil;
     _postTimer = [self startPoll];
 }
 
+- (void)sendLogglyLogs {
+    dispatch_barrier_async([SILogger sharedInstance].queue, ^{
+        [LogglyEndPointHandler sendStoredLogsWithKey:key tags:tags];
+    });
+}
+
 #pragma mark init method
 
 + (SILogger *)initWithKey:(NSString *)logglyKey tags:(NSArray *)logglyTags{
@@ -80,6 +81,14 @@ static NSArray *tags = nil;
     tags = logglyTags;
     return logger;
 }
+
+#pragma mark - post now
+
++ (void)postNow {
+    [[SILogger sharedInstance] sendLogglyLogs];
+}
+
+#pragma mark - log methods
 
 + (void)log:(NSString *)logString {
     [SILogger log:logString formatter:nil];
