@@ -62,7 +62,7 @@ static NSURLSessionConfiguration *sessionConfiguration = nil;
     NSString *urlString = [NSString stringWithFormat:@"https://logs-01.loggly.com/%@/%@",bulk?@"bulk":@"inputs",key];
     NSLog(@"Using url: %@",urlString);
     if (tags)
-        [urlString stringByAppendingString:[NSString stringWithFormat:@"/tag/%@/",tags]];
+        urlString = [urlString stringByAppendingString:[NSString stringWithFormat:@"/tag/%@/",tags]];
     return [NSURL URLWithString:urlString];
 }
 
