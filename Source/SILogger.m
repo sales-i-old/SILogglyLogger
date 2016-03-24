@@ -12,6 +12,7 @@
 @interface SILogger()
 @property (nonatomic, strong) NSMutableArray *logMessages;
 @property (nonatomic) dispatch_queue_t queue;
+@property (nonatomic) NSTimer *postTimer;
 @end
 
 @implementation SILogger
@@ -38,18 +39,37 @@ static NSArray *tags = nil;
         _logMessages = [NSMutableArray array];
         _minimumLogLevel = LogglyTrace;
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(appDidGoBackground)
+                                                 selector:@selector(sendLogglyLogs)
                                                      name:@"UIApplicationWillResignActiveNotification"
                                                    object:nil];
+        _postLogIntervalTime = 600;
+        _postTimer = [self startPoll];
+        
     }
     return self;
 }
 
-- (void)appDidGoBackground {
+- (NSTimer *)startPoll {
+    return [NSTimer timerWithTimeInterval:_postLogIntervalTime target:self selector:@selector(sendLogglyLogs) userInfo:nil repeats:YES];
+}
+- (void)dealloc
+{
+    [_postTimer invalidate];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)sendLogglyLogs {
     dispatch_barrier_async([SILogger sharedInstance].queue, ^{
         [LogglyEndPointHandler sendStoredLogsWithKey:key tags:tags];
     });
 }
+
+- (void)setPostLogIntervalTime:(NSUInteger)postLogIntervalTime {
+    [_postTimer invalidate];
+    _postLogIntervalTime = postLogIntervalTime;
+    _postTimer = [self startPoll];
+}
+
 #pragma mark init method
 
 + (SILogger *)initWithKey:(NSString *)logglyKey tags:(NSArray *)logglyTags{
@@ -63,13 +83,26 @@ static NSArray *tags = nil;
     [SILogger log:logString formatter:nil];
 }
 
++ (void)log:(NSString *)logString level:(SILogglyLogLevel)level {
+    SILogglyFormatter *formatter = [[SILogglyFormatter alloc] init];
+    formatter.logLevel = level;
+    [SILogger log:logString formatter:formatter];
+}
+
++ (void)logWithFormat:(SILogglyFormatter *)formatter {
+    [SILogger log:@"" formatter:formatter];
+}
+
 + (void)log:(NSString *)logString formatter:(SILogglyFormatter *)formatter {
     if (!formatter)
         formatter = [[SILogglyFormatter alloc] init];
     if ([SILogger sharedInstance].minimumLogLevel > formatter.logLevel) return;
     if (formatter.message.length == 0){
         formatter.message = logString;
+    } else if (logString.length > 0) {
+        NSAssert(false, @"formatter message property will override logString.");
     }
+    
     dispatch_barrier_async([SILogger sharedInstance].queue, ^{
         [LogglyEndPointHandler addLogToQueue:formatter.toString];
     });

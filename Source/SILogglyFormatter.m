@@ -43,6 +43,15 @@
     return [[UIDevice currentDevice] systemVersion];
 }
 
+- (NSString *)levelString {
+    if (_logLevel == LogglyTrace) return @"TRACE";
+    if (_logLevel == LogglyDebug) return @"DEBUG";
+    if (_logLevel == LogglyInfo) return @"INFO";
+    if (_logLevel == LogglyWarning) return @"WARNING";
+    if (_logLevel == LogglyError) return @"ERROR";
+    if (_logLevel == LogglyCritical) return @"CRITICAL";
+    return @"";
+}
 
 #pragma mark output methods
 
@@ -52,7 +61,8 @@
                                     @"appVersion"       :   [self appVersion],
                                     @"appBuildNumber"   :   [self appBuildNumber],
                                     @"deviceModel"      :   [self deviceModel],
-                                    @"osVersion"        :   [self osVersion]
+                                    @"osVersion"        :   [self osVersion],
+                                    @"level"            :   [self levelString]
                                     }];
     if (_message)
         [baseDict addEntriesFromDictionary:@{@"message" : _message}];

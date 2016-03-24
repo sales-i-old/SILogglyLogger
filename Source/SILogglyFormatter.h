@@ -23,10 +23,13 @@ typedef enum {
 @property (nonatomic, readonly) NSString *appBuildNumber;
 @property (nonatomic, readonly) NSString *deviceModel;
 @property (nonatomic, readonly) NSString *osVersion;
+@property (nonatomic, readonly) NSString *levelString;
 @property (nonatomic, strong) NSString *message;
 @property (nonatomic, assign) SILogglyLogLevel logLevel;
+
 @property (nonatomic, strong) NSMutableDictionary *customFields;
 
 @property (nonatomic, readonly) NSDictionary *toDictionary;
 @property (nonatomic, readonly) NSString *toString;
+
 @end

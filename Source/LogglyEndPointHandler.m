@@ -13,10 +13,6 @@
 
 static NSURLSessionConfiguration *sessionConfiguration = nil;
 
-+ (void)logWithKey:(NSString *)key tags:(NSArray *)tags formatter:(SILogglyFormatter *)formatter {
-    
-}
-
 + (void)addLogToQueue : (NSString *)logString {
     NSMutableArray *logs = [NSMutableArray array];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kSILogglyStoreKey])
