@@ -15,6 +15,7 @@
 - (id)init {
     if ((self = [super init])) {
         _customFields = [NSMutableDictionary dictionary];
+        _logLevel = LogglyInfo;
     }
     return self;
 }
@@ -41,6 +42,7 @@
 - (NSString *)osVersion {
     return [[UIDevice currentDevice] systemVersion];
 }
+
 
 #pragma mark output methods
 
@@ -75,15 +77,10 @@
 #pragma mark class methods
 
 + (NSString *)iso8601StringFromDate:(NSDate *)date {
-    struct tm *timeinfo;
-    char buffer[80];
-    
-    NSTimeInterval timeInterval = [date timeIntervalSince1970];
-    time_t rawtime = (time_t)timeInterval;
-    timeinfo = gmtime(&rawtime);
-    NSMutableString *format = [NSMutableString stringWithString:@"%Y-%m-%dT%H:%M:%S"];
-    [format appendString:[[NSString stringWithFormat:@"%.3lfZ", timeInterval - rawtime] substringFromIndex:1]];
-    strftime(buffer, 80, [format cStringUsingEncoding:NSUTF8StringEncoding], timeinfo);
-    return [NSString stringWithCString:buffer encoding:NSUTF8StringEncoding];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+    NSString *iso8601String = [dateFormatter stringFromDate:date];
+    return iso8601String;
 }
 @end
