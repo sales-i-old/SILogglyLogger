@@ -65,7 +65,9 @@ static NSArray *tags = nil;
 }
 
 - (void)setPostLogIntervalTime:(NSUInteger)postLogIntervalTime {
-    [_postTimer invalidate];
+    if (_postTimer.isValid)
+        [_postTimer invalidate];
+    _postTimer = nil;
     _postLogIntervalTime = postLogIntervalTime;
     _postTimer = [self startPoll];
 }
