@@ -114,7 +114,7 @@ static NSArray *tags = nil;
         NSAssert(false, @"formatter message property will override logString.");
     }
     
-    dispatch_barrier_async([SILogger sharedInstance].queue, ^{
+    dispatch_barrier_sync([SILogger sharedInstance].queue, ^{
         [LogglyEndPointHandler addLogToQueue:formatter.toString];
     });
 }
