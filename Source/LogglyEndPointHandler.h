@@ -10,7 +10,6 @@
 #import "SILogglyFormatter.h"
 
 @interface LogglyEndPointHandler : NSObject
-+ (void)logWithKey:(NSString *)key tags:(NSArray *)tags formatter:(SILogglyFormatter *)formatter;
 + (void)addLogToQueue : (NSString *)logString;
 + (void)sendStoredLogsWithKey:(NSString *)key tags:(NSArray *)tags;
 @end
